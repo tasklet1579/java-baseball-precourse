@@ -20,9 +20,10 @@ public class GameLauncher {
     private static final String RETRY = "1";
     private static final String FINISH = "2";
 
-    private static GameCode gameCode = GameCode.START;
+    private static GameCode gameCode;
 
     public static void start() {
+        gameCode = GameCode.START;
         while (isFinished()) {
             isRetry();
             playBall(pitcher.createUniqueBalls());
