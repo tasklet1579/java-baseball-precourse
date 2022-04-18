@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ReaderTest {
     @DisplayName("플레이어 입력값 유효성 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"-123", "ab5", "가나다", "''", "7 45", "021"})
+    @CsvSource(value = {"-123", "ab5", "가나다", "''", "7 45", "021", "332", "777"})
     void 플레이어_입력값_유효성_테스트(String given) {
         // then
         assertThatThrownBy(() -> {
