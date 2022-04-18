@@ -2,6 +2,9 @@ package baseball.model;
 
 import baseball.constant.GameCode;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Reader {
     private static final String MINUS = "-";
     private static final String ZERO = "0";
@@ -24,6 +27,9 @@ public class Reader {
         if (numbers.length() != numberLength) {
             throw new IllegalArgumentException("허용되지 않는 숫자 길이입니다.");
         }
+        if (validateDuplicatedNumbers(numbers) && numberLength == 3) {
+            throw new IllegalArgumentException("서로 다른 숫자 3개를 선택해주세요.");
+        }
         try {
             Integer.parseInt(numbers);
         } catch (NumberFormatException e) {
@@ -35,5 +41,16 @@ public class Reader {
         if (Integer.parseInt(number) < BEGIN_NUMBER_RANGE || Integer.parseInt(number) > END_NUMBER_RANGE) {
             throw new IllegalArgumentException("게임 재시작, 종료 외에는 지원하지 않는 명령입니다.");
         }
+    }
+
+    public boolean validateDuplicatedNumbers(String numbers) {
+        Set<Integer> store = new HashSet<>();
+        for (int idx = 0; idx < numbers.length(); idx++) {
+            store.add(Character.getNumericValue(numbers.charAt(idx)));
+        }
+        if (store.size() != 3) {
+            return true;
+        }
+        return false;
     }
 }
